@@ -31,7 +31,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="11">
+    <Units Count="12">
       <Unit0>
         <Filename Value="parside.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -81,6 +81,10 @@
         <Filename Value="..\synedit-fpc\synedit\syneditstrconst.pp"/>
         <IsPartOfProject Value="True"/>
       </Unit10>
+      <Unit11>
+        <Filename Value="..\SynFacilSyn\SynFacilHighlighter.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit11>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -91,7 +95,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="..\synedit-fpc\synedit;comps"/>
+      <OtherUnitFiles Value="..\synedit-fpc\synedit;comps;..\SynFacilSyn"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

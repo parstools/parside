@@ -14,6 +14,9 @@ type
   THiSyntax = class(TInterfacedObject, IHiSyntax)
   private
     fHighlighters: TStringList;
+  protected
+    procedure LoadStandard;
+    procedure LoadFacil;
   public
     constructor Create();
     destructor Destroy;
@@ -24,15 +27,14 @@ type
 
 implementation
 uses
-  Graphics, SynHighlighterPas,SynHighlighterXML,SynEditStrConst;
+  Graphics, SynHighlighterPas,SynHighlighterXML,SynEditStrConst, SynFacilHighlighter,dialogs;
 
 { THiSyntax }
 
-constructor THiSyntax.Create();
+procedure THiSyntax.LoadStandard;
 var
   SynHL: TSynCustomFoldHighlighter;
 begin
-  fHighlighters:=TStringList.Create;
   SynHL:=TSynPasSyn.Create(nil);
   SynHL.CommentAttribute.Foreground := clTeal;
   SynHL.IdentifierAttribute.Foreground := clNavy;
@@ -43,6 +45,34 @@ begin
   fHighlighters.AddObject(SynHL.LanguageName, SynHL);
   SynHL:=TSynXmlSyn.Create(nil);
   fHighlighters.AddObject(SynHL.LanguageName, SynHL);
+end;
+
+procedure THiSyntax.LoadFacil;
+var
+  Folder: string;
+  result: LongInt;
+  sr: TSearchRec;
+  hlt : TSynFacilSyn;
+begin
+  Folder:='facildata';
+  result :=  FindFirst(folder+'/*.xml', faAnyFile, sr);
+  while result = 0 do
+  begin
+    hlt := TSynFacilSyn.Create(nil);
+    hlt.LoadFromFile(Folder+'/'+sr.Name);
+    hlt.DefaultFilter:='*';
+    hlt.ClearSpecials;
+    fHighlighters.AddObject(ExtractFileName(sr.Name), hlt);
+    result := FindNext(sr);
+  end;
+  FindClose(sr);
+end;
+
+constructor THiSyntax.Create();
+begin
+  fHighlighters:=TStringList.Create;
+//  LoadStandard;
+  LoadFacil;
 end;
 
 destructor THiSyntax.Destroy;
