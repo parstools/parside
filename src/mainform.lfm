@@ -37,15 +37,33 @@ object Form1: TForm1
     end
   end
   object MainMenu1: TMainMenu
+    Images = imglFile16
     left = 33
     top = 83
     object MenuItem1: TMenuItem
       Caption = '&File'
+      object miFileNew: TMenuItem
+        Action = actFileNew
+      end
+      object miFileOpen: TMenuItem
+        Action = actFileOpen
+      end
     end
   end
   object actlFile: TActionList
+    Images = imglFile16
     left = 137
     top = 75
+    object actFileNew: TAction
+      Category = 'File'
+      Caption = 'New'
+      ImageIndex = 12
+    end
+    object actFileOpen: TAction
+      Category = 'File'
+      Caption = 'Open...'
+      ImageIndex = 0
+    end
   end
   object imglFile16: TImageList
     left = 96

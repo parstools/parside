@@ -13,11 +13,15 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    actFileNew: TAction;
+    actFileOpen: TAction;
     actlFile: TActionList;
     imglFile16: TImageList;
     imglTb16: TImageList;
     MainMenu1: TMainMenu;
     MenuItem1: TMenuItem;
+    miFileOpen: TMenuItem;
+    miFileNew: TMenuItem;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
     ToolButton2: TToolButton;
