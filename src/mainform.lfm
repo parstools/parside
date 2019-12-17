@@ -73,14 +73,12 @@ object Form1: TForm1
       Caption = 'New'
       ImageIndex = 12
       OnExecute = actFileNewExecute
-      OnUpdate = actFileNewUpdate
     end
     object actFileOpen: TAction
       Category = 'File'
       Caption = 'Open...'
       ImageIndex = 0
       OnExecute = actFileOpenExecute
-      OnUpdate = actFileOpenUpdate
     end
     object actFileClosePage: TAction
       Category = 'File'

@@ -35,13 +35,10 @@ type
     procedure actFileClosePageExecute(Sender: TObject);
     procedure actFileClosePageUpdate(Sender: TObject);
     procedure actFileNewExecute(Sender: TObject);
-    procedure actFileNewUpdate(Sender: TObject);
     procedure actFileOpenExecute(Sender: TObject);
-    procedure actFileOpenUpdate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
   private
-    fSynEdit: TSynEdit;
     fNotebook: TEdNotebook;
     fDocumentFactory: TDocumentFactory;
     procedure DoOpenFile(AFileName: string);
@@ -61,9 +58,6 @@ uses
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  fSynEdit:=TSynEdit.Create(self);
-  fSynEdit.Parent:=self;
-  fSynEdit.Align:=alClient;
   fNotebook:=TEdNotebook.Create(self);
   InsertControl(fNotebook);
   fNotebook.Align:=alClient;
@@ -101,20 +95,10 @@ begin
   LDocument.OpenFile(AFileName);
 end;
 
-procedure TForm1.actFileNewUpdate(Sender: TObject);
-begin
-  actFileNew.Enabled := true;
-end;
-
 procedure TForm1.actFileOpenExecute(Sender: TObject);
 begin
   if OpenDialog.Execute then
     DoOpenFile(OpenDialog.FileName);
-end;
-
-procedure TForm1.actFileOpenUpdate(Sender: TObject);
-begin
-  actFileOpen.Enabled := true;
 end;
 
 procedure TForm1.actFileNewExecute(Sender: TObject);
