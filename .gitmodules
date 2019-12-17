@@ -1,0 +1,4 @@
+[submodule "synedit-fpc"]
+	path = synedit-fpc
+	url = https://github.com/borneq/synedit-fpc.git
+	branch = dev
