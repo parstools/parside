@@ -1,17 +1,27 @@
-        unit mainform;
+unit mainform;
 
 {$mode objfpc}{$H+}
 
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, SynEdit;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, ActnList,
+  ComCtrls, SynEdit;
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
+    actlFile: TActionList;
+    imglFile16: TImageList;
+    imglTb16: TImageList;
+    MainMenu1: TMainMenu;
+    MenuItem1: TMenuItem;
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
     procedure FormCreate(Sender: TObject);
   private
     fSynEdit: TSynEdit;
