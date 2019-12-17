@@ -83,7 +83,10 @@ procedure TDocument.OpenFile(AFileName: string);
 begin
   fFileName := AFileName;
   fSheet.Caption := GetTitle;
-
+  if AFileName<>'' then
+  begin
+    FSynEdit.Lines.LoadFromFile(AFileName);
+  end;
 end;
 
 class function TDocument.CompareFileNames(const S1: string; const S2: string): integer;
