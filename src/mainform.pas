@@ -93,6 +93,7 @@ begin
   end;
   LDocument := fDocumentFactory.CreateNew(AFileName);
   LDocument.OpenFile(AFileName);
+  LDocument.Activate;
 end;
 
 procedure TForm1.actFileOpenExecute(Sender: TObject);
