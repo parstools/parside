@@ -16,10 +16,11 @@ type
     fFileName: string;
     fSheet: TEdSheet;
     fSynEdit: TSynEdit;
+    fFactory: IDocumentFactory;
     fUntitledManager: IUntitledManager;
     FUntitledNumber: integer;
   public
-    constructor Create(ASheet: TEdSheet; ASynEdit: TSynEdit; AUntitledManager: IUntitledManager);
+    constructor Create(AFactory: IDocumentFactory; ASheet: TEdSheet; ASynEdit: TSynEdit);
     destructor Destroy; override;
     function GetPath: string;
     function GetTitle: string;
@@ -37,14 +38,15 @@ uses
 
 { TDocument }
 
-constructor TDocument.Create(ASheet: TEdSheet; ASynEdit: TSynEdit; AUntitledManager: IUntitledManager);
+constructor TDocument.Create(AFactory: IDocumentFactory; ASheet: TEdSheet; ASynEdit: TSynEdit);
 var
   CmdIndex: integer;
 begin
   fSheet:=ASheet;
   fSheet.IntfPtr := self;
   fSynEdit:=ASynEdit;
-  fUntitledManager:=AUntitledManager;
+  fFactory:=AFactory;
+  fUntitledManager:=fFactory.GetUntitledManager;
   FUntitledNumber:=0;
   with fSynEdit do
   begin

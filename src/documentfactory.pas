@@ -21,6 +21,7 @@ type
     function GetDocument(Index: integer): IDocument;
     function CreateNew(AFileName: string): IDocument;
     function GetActive: IDocument;
+    function GetUntitledManager: IUntitledManager;
   end;
 
 implementation
@@ -57,7 +58,7 @@ begin
   syn.Align := alClient;
   sheet.InsertControl(syn);
   sheet.FocusedControl := syn;
-  Result := TDocument.Create(sheet, syn, fUntitledManager);
+  Result := TDocument.Create(self, sheet, syn);
 end;
 
 function TDocumentFactory.GetActive: IDocument;
@@ -66,6 +67,11 @@ begin
      Result := nil
   else
      Result := FNotebook.ActiveSheet.IntfPtr as IDocument;
+end;
+
+function TDocumentFactory.GetUntitledManager: IUntitledManager;
+begin
+  Result := fUntitledManager;
 end;
 
 end.
