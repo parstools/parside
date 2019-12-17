@@ -2,3 +2,6 @@
 	path = synedit-fpc
 	url = https://github.com/borneq/synedit-fpc.git
 	branch = dev
+[submodule "SynFacilSyn"]
+	path = SynFacilSyn
+	url = https://github.com/t-edson/SynFacilSyn.git
