@@ -17,6 +17,7 @@ type
     fSheet: TEdSheet;
     fSynEdit: TSynEdit;
     fFactory: IDocumentFactory;
+    fHiSyntax: IHiSyntax;
     fUntitledManager: IUntitledManager;
     FUntitledNumber: integer;
   public
@@ -34,7 +35,7 @@ type
 
 implementation
 uses
-  LCLType,SynEditKeyCmds;
+  LCLType,SynEditKeyCmds, SynEditStrConst;
 
 { TDocument }
 
@@ -46,6 +47,7 @@ begin
   fSheet.IntfPtr := self;
   fSynEdit:=ASynEdit;
   fFactory:=AFactory;
+  fHiSyntax:=fFactory.GetHiSyntax;
   fUntitledManager:=fFactory.GetUntitledManager;
   FUntitledNumber:=0;
   with fSynEdit do
@@ -88,6 +90,7 @@ begin
   if AFileName<>'' then
   begin
     FSynEdit.Lines.LoadFromFile(AFileName);
+    FSynEdit.Highlighter := fHiSyntax.GetHighlighterByFileName(AFileName);
   end;
 end;
 

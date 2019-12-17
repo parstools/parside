@@ -15,6 +15,7 @@ type
   private
     fNotebook: TEdNotebook;
     fUntitledManager: IUntitledManager;
+    fHiSyntax: IHiSyntax;
   public
     constructor Create(ANotebook: TEdNotebook);
     function GetDocumentCount: integer;
@@ -22,11 +23,12 @@ type
     function CreateNew(AFileName: string): IDocument;
     function GetActive: IDocument;
     function GetUntitledManager: IUntitledManager;
+    function GetHiSyntax: IHiSyntax;
   end;
 
 implementation
 uses
-  Controls, Graphics, SynEdit, Document, untitledmanager;
+  Controls, Graphics, SynEdit, Document, untitledmanager, hisyntax;
 
 { TDocumentFactory }
 
@@ -34,6 +36,7 @@ constructor TDocumentFactory.Create(ANotebook: TEdNotebook);
 begin
   fNotebook := ANotebook;
   fUntitledManager := TUntitledManager.Create();
+  fHiSyntax := THiSyntax.Create();
 end;
 
 function TDocumentFactory.GetDocumentCount: integer;
@@ -72,6 +75,11 @@ end;
 function TDocumentFactory.GetUntitledManager: IUntitledManager;
 begin
   Result := fUntitledManager;
+end;
+
+function TDocumentFactory.GetHiSyntax: IHiSyntax;
+begin
+  Result := fHiSyntax;
 end;
 
 end.
