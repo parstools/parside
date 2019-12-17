@@ -7,7 +7,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, mainform, intfs, document;
+  Forms, mainform, intfs, document, documentfactory, untitledmanager;
 
 {$R *.res}
 

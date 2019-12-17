@@ -31,7 +31,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="5">
+    <Units Count="8">
       <Unit0>
         <Filename Value="parside.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -46,6 +46,7 @@
       <Unit2>
         <Filename Value="..\synedit-fpc\synedit\synedit.pp"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="SynEdit"/>
       </Unit2>
       <Unit3>
         <Filename Value="intfs.pas"/>
@@ -55,6 +56,18 @@
         <Filename Value="document.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit4>
+      <Unit5>
+        <Filename Value="comps\notebook.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="documentfactory.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="untitledmanager.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit7>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -65,7 +78,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="..\synedit-fpc\synedit"/>
+      <OtherUnitFiles Value="..\synedit-fpc\synedit;comps"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

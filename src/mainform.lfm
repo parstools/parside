@@ -6,6 +6,7 @@ object Form1: TForm1
   Caption = 'Pars IDE'
   ClientHeight = 464
   ClientWidth = 620
+  KeyPreview = True
   Menu = MainMenu1
   OnCreate = FormCreate
   LCLVersion = '2.0.6.0'
@@ -42,12 +43,25 @@ object Form1: TForm1
     top = 83
     object MenuItem1: TMenuItem
       Caption = '&File'
+      OnClick = MenuItem1Click
       object miFileNew: TMenuItem
         Action = actFileNew
+        ShortCut = 16462
+      end
+      object MenuItem3: TMenuItem
+        Caption = '-'
       end
       object miFileOpen: TMenuItem
         Action = actFileOpen
+        ShortCut = 16463
       end
+      object miFileClosePage: TMenuItem
+        Action = actFileClosePage
+        ShortCut = 16499
+      end
+    end
+    object MenuItem2: TMenuItem
+      Caption = 'MenuItem2'
     end
   end
   object actlFile: TActionList
@@ -58,11 +72,22 @@ object Form1: TForm1
       Category = 'File'
       Caption = 'New'
       ImageIndex = 12
+      OnExecute = actFileNewExecute
+      OnUpdate = actFileNewUpdate
     end
     object actFileOpen: TAction
       Category = 'File'
       Caption = 'Open...'
       ImageIndex = 0
+      OnExecute = actFileOpenExecute
+      OnUpdate = actFileOpenUpdate
+    end
+    object actFileClosePage: TAction
+      Category = 'File'
+      Caption = 'Close Page'
+      ImageIndex = 5
+      OnExecute = actFileClosePageExecute
+      OnUpdate = actFileClosePageUpdate
     end
   end
   object imglFile16: TImageList
@@ -942,5 +967,13 @@ object Form1: TForm1
       00005A5D5CFF585C5AFF575A59FF555957FF535755FF525554FF505452FF5053
       51FF4F5351FF4F5351FF505351FF
     }
+  end
+  object OpenDialog: TOpenDialog
+    left = 77
+    top = 26
+  end
+  object SaveDialog: TSaveDialog
+    left = 172
+    top = 37
   end
 end
