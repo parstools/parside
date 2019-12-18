@@ -1,0 +1,7 @@
+cpp.xml|C++ Files (*.c,*.cpp,*.h,*.hpp,*.hh)|*.c;*.cpp;*.h;*.hpp;*.hh
+cmake.xml|CMake Files (CMakeLists.txt)|CMakeLists.txt
+make.xml|Make Files (Makefile)|Makefile
+flex.xml|FLex Files (*.l)|*.l
+bison.xml|Bison Files (*.y)|*.y
+aladin.xml|Aladin Files (*.aladin)|*.aladin
+

@@ -27,7 +27,8 @@ type
 
 implementation
 uses
-  Graphics, SynHighlighterPas,SynHighlighterXML,SynEditStrConst, SynFacilHighlighter,dialogs;
+  Graphics, SynHighlighterPas,SynHighlighterXML,SynEditStrConst, SynFacilHighlighter,
+  fgl,dialogs,RegExpr;
 
 { THiSyntax }
 
@@ -48,30 +49,45 @@ begin
 end;
 
 procedure THiSyntax.LoadFacil;
+type TFMap = specialize TFPGMap<string, string>;
 var
-  Folder: string;
+  Folder,line: string;
   result: LongInt;
   sr: TSearchRec;
   hlt : TSynFacilSyn;
+  dataList: TStringList;
+  map: TFMap;
+  i,j: integer;
 begin
   Folder:='facildata';
+  map := TFMap.Create;
+  dataList := TStringList.Create;
+  dataList.LoadFromFile(folder+'/filters.dat');
+  for i:=0 to dataList.Count-1 do
+  begin
+    line:=dataList[i];
+    j := Pos('|', line);
+    if j <= 0 then continue;
+    map.Add(Copy(line,1,j-1), Copy(line,j+1));
+  end;
+  dataList.Free;
   result :=  FindFirst(folder+'/*.xml', faAnyFile, sr);
   while result = 0 do
   begin
     hlt := TSynFacilSyn.Create(nil);
     hlt.LoadFromFile(Folder+'/'+sr.Name);
-    hlt.DefaultFilter:='*';
-    hlt.ClearSpecials;
+    hlt.DefaultFilter:=map[sr.Name];
     fHighlighters.AddObject(ExtractFileName(sr.Name), hlt);
     result := FindNext(sr);
   end;
   FindClose(sr);
+  map.Free;
 end;
 
 constructor THiSyntax.Create();
 begin
   fHighlighters:=TStringList.Create;
-//  LoadStandard;
+  LoadStandard;
   LoadFacil;
 end;
 
@@ -97,26 +113,37 @@ end;
 
 function THiSyntax.GetHighlighterByFileName(APath: string): TSynCustomFoldHighlighter;
 var
-  ext,Filter: string;
+  name,ext,Filter,mask: string;
+  StrArray: TStringArray;
   synHL: TSynCustomFoldHighlighter;
-  i,j,ExtLen: integer;
+  i,n,j,ExtLen: integer;
+  re: TRegExpr;
 begin
+  name:=ExtractFileName(APath);
+  Result := nil;
   ext := ExtractFileExt(APath);
   ExtLen := Length(ext);
   for i:=0 to fHighlighters.Count-1 do
   begin
     synHL := fHighlighters.Objects[i] as TSynCustomFoldHighlighter;
-    Filter := LowerCase(synHL.DefaultFilter);
-    j := Pos('|', Filter);
-    if j > 0 then
+    Filter := synHL.DefaultFilter;
+    n := Pos('|', Filter);
+    if n > 0 then
     begin
-      Delete(Filter, 1, j);
-      j := Pos(ext, Filter);
-      if (j > 0) and ((j + ExtLen > Length(Filter)) or
-        (Filter[j + ExtLen] = ';')) then
+      Delete(Filter, 1, n);
+      StrArray:=Filter.Split(';');
+      for j:=0 to Length(StrArray)-1 do
       begin
-        Result := synHL;
-        exit;
+        mask:=StringReplace(StrArray[j],'.','\.',[rfReplaceAll]);
+        mask:=StringReplace(mask,'*','.*',[rfReplaceAll]);
+        re := TRegExpr.Create(mask);
+        if re.Exec(name) then
+        begin
+           Result:=synHL;
+           re.Free;
+           exit;
+        end else
+           re.Free;
       end;
     end;
   end;

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Language name="c" ext=".c" CaseSensitive="true">
+  <Attribute Name="Keyword" Style="b"> </Attribute>
+  <Token CharsStart="0..9" Content = '0..9.' Attribute='NUMBER'> </Token>
+  <Keyword>all clean</Keyword>
+  <String Start='"' End='"'></String>
+</Language>
