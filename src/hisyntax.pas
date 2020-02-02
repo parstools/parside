@@ -27,7 +27,7 @@ type
 
 implementation
 uses
-  Graphics, SynHighlighterPas,SynHighlighterXML,SynEditStrConst, SynFacilHighlighter,
+  Graphics, SynHighlighterPas,SynHighlighterXML,SynEditStrConst,
   fgl,dialogs,RegExpr;
 
 { THiSyntax }
@@ -53,8 +53,6 @@ type TFMap = specialize TFPGMap<string, string>;
 var
   Folder,line: string;
   result: LongInt;
-  sr: TSearchRec;
-  hlt : TSynFacilSyn;
   dataList: TStringList;
   map: TFMap;
   i,j: integer;
@@ -71,16 +69,6 @@ begin
     map.Add(Copy(line,1,j-1), Copy(line,j+1));
   end;
   dataList.Free;
-  result :=  FindFirst(folder+'/*.xml', faAnyFile, sr);
-  while result = 0 do
-  begin
-    hlt := TSynFacilSyn.Create(nil);
-    hlt.LoadFromFile(Folder+'/'+sr.Name);
-    hlt.DefaultFilter:=map[sr.Name];
-    fHighlighters.AddObject(ExtractFileName(sr.Name), hlt);
-    result := FindNext(sr);
-  end;
-  FindClose(sr);
   map.Free;
 end;
 
