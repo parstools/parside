@@ -5,7 +5,7 @@ unit document;
 interface
 
 uses
-  Classes, SysUtils, intfs, notebook, SynEdit;
+  Classes, SysUtils, intfs, notebook, ATSynEdit;
 
 type
 
@@ -15,13 +15,13 @@ type
   private
     fFileName: string;
     fSheet: TEdSheet;
-    fSynEdit: TSynEdit;
+    fSynEdit: TAtSynEdit;
     fFactory: IDocumentFactory;
-    fHiSyntax: IHiSyntax;
+//    fHiSyntax: IHiSyntax;
     fUntitledManager: IUntitledManager;
     FUntitledNumber: integer;
   public
-    constructor Create(AFactory: IDocumentFactory; ASheet: TEdSheet; ASynEdit: TSynEdit);
+    constructor Create(AFactory: IDocumentFactory; ASheet: TEdSheet; ASynEdit: TAtSynEdit);
     destructor Destroy; override;
     function GetPath: string;
     function GetTitle: string;
@@ -39,7 +39,7 @@ uses
 
 { TDocument }
 
-constructor TDocument.Create(AFactory: IDocumentFactory; ASheet: TEdSheet; ASynEdit: TSynEdit);
+constructor TDocument.Create(AFactory: IDocumentFactory; ASheet: TEdSheet; ASynEdit: TATSynEdit);
 var
   CmdIndex: integer;
 begin
@@ -47,16 +47,16 @@ begin
   fSheet.IntfPtr := self;
   fSynEdit:=ASynEdit;
   fFactory:=AFactory;
-  fHiSyntax:=fFactory.GetHiSyntax;
+  //fHiSyntax:=fFactory.GetHiSyntax;
   fUntitledManager:=fFactory.GetUntitledManager;
   FUntitledNumber:=0;
   with fSynEdit do
   begin
-    Options := Options + [eoTrimTrailingSpaces] - [eoSmartTabDelete];
+    {Options := Options + [eoTrimTrailingSpaces] - [eoSmartTabDelete];
     CmdIndex := Keystrokes.FindCommand(ecInsertLine);
     Keystrokes.Delete(CmdIndex);
     CmdIndex := Keystrokes.FindCommand(ecDeleteWord);
-    Keystrokes[CmdIndex].Key:=VK_DELETE;
+    Keystrokes[CmdIndex].Key:=VK_DELETE;}
   end;
 end;
 
@@ -89,8 +89,9 @@ begin
   fSheet.Caption := GetTitle;
   if AFileName<>'' then
   begin
-    FSynEdit.Lines.LoadFromFile(AFileName);
-    FSynEdit.Highlighter := fHiSyntax.GetHighlighterByFileName(AFileName);
+    FSynEdit.LoadFromFile(AFileName);
+    FSynEdit.OptWrapMode:=cWrapOn;
+//    FSynEdit.Highlighter := fHiSyntax.GetHighlighterByFileName(AFileName);
   end;
 end;
 

@@ -26,12 +26,21 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <RequiredPackages Count="1">
+    <RequiredPackages Count="4">
       <Item1>
-        <PackageName Value="LCL"/>
+        <PackageName Value="atsynedit_package"/>
       </Item1>
+      <Item2>
+        <PackageName Value="atsynedit_ex_package"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="atsynedit_cmp_package"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="LCL"/>
+      </Item4>
     </RequiredPackages>
-    <Units Count="12">
+    <Units Count="8">
       <Unit0>
         <Filename Value="parside.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -44,47 +53,29 @@
         <ResourceBaseClass Value="Form"/>
       </Unit1>
       <Unit2>
-        <Filename Value="..\synedit-fpc\synedit\synedit.pp"/>
+        <Filename Value="intfs.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="SynEdit"/>
       </Unit2>
       <Unit3>
-        <Filename Value="intfs.pas"/>
+        <Filename Value="document.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit3>
       <Unit4>
-        <Filename Value="document.pas"/>
+        <Filename Value="comps\notebook.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit4>
       <Unit5>
-        <Filename Value="comps\notebook.pas"/>
+        <Filename Value="documentfactory.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit5>
       <Unit6>
-        <Filename Value="documentfactory.pas"/>
+        <Filename Value="untitledmanager.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit6>
       <Unit7>
-        <Filename Value="untitledmanager.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit7>
-      <Unit8>
         <Filename Value="hisyntax.pas"/>
         <IsPartOfProject Value="True"/>
-      </Unit8>
-      <Unit9>
-        <Filename Value="..\synedit-fpc\synedit\synedithighlighterfoldbase.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="SynEditHighlighterFoldBase"/>
-      </Unit9>
-      <Unit10>
-        <Filename Value="..\synedit-fpc\synedit\syneditstrconst.pp"/>
-        <IsPartOfProject Value="True"/>
-      </Unit10>
-      <Unit11>
-        <Filename Value="..\SynFacilSyn\SynFacilHighlighter.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit11>
+      </Unit7>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -95,7 +86,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="..\synedit-fpc\synedit;comps;..\SynFacilSyn"/>
+      <OtherUnitFiles Value="comps"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

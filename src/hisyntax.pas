@@ -11,7 +11,7 @@ type
 
   { THiSyntax }
 
-  THiSyntax = class(TInterfacedObject, IHiSyntax)
+  THiSyntax = class(TInterfacedObject{, IHiSyntax})
   private
     fHighlighters: TStringList;
   protected

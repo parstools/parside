@@ -15,7 +15,7 @@ type
   private
     fNotebook: TEdNotebook;
     fUntitledManager: IUntitledManager;
-    fHiSyntax: IHiSyntax;
+//    fHiSyntax: IHiSyntax;
   public
     constructor Create(ANotebook: TEdNotebook);
     function GetDocumentCount: integer;
@@ -23,12 +23,12 @@ type
     function CreateNew(AFileName: string): IDocument;
     function GetActive: IDocument;
     function GetUntitledManager: IUntitledManager;
-    function GetHiSyntax: IHiSyntax;
+//    function GetHiSyntax: IHiSyntax;
   end;
 
 implementation
 uses
-  Controls, Graphics, SynEdit, Document, untitledmanager, hisyntax;
+  Controls, Graphics, AtSynEdit, Document, untitledmanager, hisyntax;
 
 { TDocumentFactory }
 
@@ -36,7 +36,7 @@ constructor TDocumentFactory.Create(ANotebook: TEdNotebook);
 begin
   fNotebook := ANotebook;
   fUntitledManager := TUntitledManager.Create();
-  fHiSyntax := THiSyntax.Create();
+  //fHiSyntax := THiSyntax.Create();
 end;
 
 function TDocumentFactory.GetDocumentCount: integer;
@@ -52,10 +52,10 @@ end;
 function TDocumentFactory.CreateNew(AFileName: string): IDocument;
 var
   sheet: TEdSheet;
-  syn: TSynEdit;
+  syn: TAtSynEdit;
 begin
   sheet := FNotebook.AddTabSheet();
-  syn := TSynEdit.Create(sheet);
+  syn := TAtSynEdit.Create(sheet);
   syn.Color := clWhite;
   syn.BorderStyle := bsNone;
   syn.Align := alClient;
@@ -77,9 +77,9 @@ begin
   Result := fUntitledManager;
 end;
 
-function TDocumentFactory.GetHiSyntax: IHiSyntax;
+{function TDocumentFactory.GetHiSyntax: IHiSyntax;
 begin
   Result := fHiSyntax;
-end;
+end;}
 
 end.
