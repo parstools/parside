@@ -61,20 +61,21 @@
         <IsPartOfProject Value="True"/>
       </Unit3>
       <Unit4>
-        <Filename Value="comps\notebook.pas"/>
+        <Filename Value="documentfactory.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit4>
       <Unit5>
-        <Filename Value="documentfactory.pas"/>
+        <Filename Value="untitledmanager.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit5>
       <Unit6>
-        <Filename Value="untitledmanager.pas"/>
+        <Filename Value="hisyntax.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit6>
       <Unit7>
-        <Filename Value="hisyntax.pas"/>
+        <Filename Value="..\nicecomps\src\nicepages.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="NicePages"/>
       </Unit7>
     </Units>
   </ProjectOptions>
@@ -86,7 +87,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="comps"/>
+      <OtherUnitFiles Value="..\nicecomps\src"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

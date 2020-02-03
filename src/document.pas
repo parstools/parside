@@ -5,7 +5,7 @@ unit document;
 interface
 
 uses
-  Classes, SysUtils, intfs, notebook, ATSynEdit;
+  Classes, SysUtils, intfs, NicePages, ATSynEdit;
 
 type
 
@@ -14,14 +14,14 @@ type
   TDocument = class(TInterfacedObject, IDocument)
   private
     fFileName: string;
-    fSheet: TEdSheet;
-    fSynEdit: TAtSynEdit;
+    fSheet: TNiceSheet;
+    fAtSynEdit: TAtSynEdit;
     fFactory: IDocumentFactory;
 //    fHiSyntax: IHiSyntax;
     fUntitledManager: IUntitledManager;
     FUntitledNumber: integer;
   public
-    constructor Create(AFactory: IDocumentFactory; ASheet: TEdSheet; ASynEdit: TAtSynEdit);
+    constructor Create(AFactory: IDocumentFactory; ASheet: TNiceSheet; ASynEdit: TAtSynEdit);
     destructor Destroy; override;
     function GetPath: string;
     function GetTitle: string;
@@ -39,25 +39,19 @@ uses
 
 { TDocument }
 
-constructor TDocument.Create(AFactory: IDocumentFactory; ASheet: TEdSheet; ASynEdit: TATSynEdit);
+constructor TDocument.Create(AFactory: IDocumentFactory; ASheet: TNiceSheet; ASynEdit: TATSynEdit);
 var
   CmdIndex: integer;
 begin
   fSheet:=ASheet;
   fSheet.IntfPtr := self;
-  fSynEdit:=ASynEdit;
+  fAtSynEdit:=ASynEdit;
   fFactory:=AFactory;
   //fHiSyntax:=fFactory.GetHiSyntax;
   fUntitledManager:=fFactory.GetUntitledManager;
   FUntitledNumber:=0;
-  with fSynEdit do
-  begin
-    {Options := Options + [eoTrimTrailingSpaces] - [eoSmartTabDelete];
-    CmdIndex := Keystrokes.FindCommand(ecInsertLine);
-    Keystrokes.Delete(CmdIndex);
-    CmdIndex := Keystrokes.FindCommand(ecDeleteWord);
-    Keystrokes[CmdIndex].Key:=VK_DELETE;}
-  end;
+  fAtSynEdit.OptRulerVisible:=false;
+  fAtSynEdit.OptUnprintedVisible:=false;
 end;
 
 destructor TDocument.Destroy;
@@ -89,9 +83,9 @@ begin
   fSheet.Caption := GetTitle;
   if AFileName<>'' then
   begin
-    FSynEdit.LoadFromFile(AFileName);
-    FSynEdit.OptWrapMode:=cWrapOn;
-//    FSynEdit.Highlighter := fHiSyntax.GetHighlighterByFileName(AFileName);
+    fAtSynEdit.LoadFromFile(AFileName);
+    fAtSynEdit.OptWrapMode:=cWrapOn;
+//    fAtSynEdit.Highlighter := fHiSyntax.GetHighlighterByFileName(AFileName);
   end;
 end;
 

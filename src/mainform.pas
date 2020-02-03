@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Menus, ActnList,
-  ComCtrls, SynEdit, notebook, documentfactory;
+  ComCtrls, ATSynEdit, NicePages, documentfactory;
 
 type
 
@@ -17,6 +17,7 @@ type
     actFileOpen: TAction;
     actFileClosePage: TAction;
     actlFile: TActionList;
+    ATSynEdit1: TATSynEdit;
     imglFile16: TImageList;
     imglTb16: TImageList;
     MainMenu1: TMainMenu;
@@ -39,7 +40,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
   private
-    fNotebook: TEdNotebook;
+    fNotebook: TNicePages;
     fDocumentFactory: TDocumentFactory;
     procedure DoOpenFile(AFileName: string);
   public
@@ -58,7 +59,7 @@ uses
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  fNotebook:=TEdNotebook.Create(self);
+  fNotebook:=TNicePages.Create(self);
   InsertControl(fNotebook);
   fNotebook.Align:=alClient;
   //EdNotebook.OnBeforeCloseQuery:=@TabBeforeCloseQuery;

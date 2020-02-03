@@ -5,7 +5,7 @@ unit documentfactory;
 interface
 
 uses
-  Classes, SysUtils, intfs, notebook;
+  Classes, SysUtils, intfs, NicePages;
 
 type
 
@@ -13,11 +13,11 @@ type
 
   TDocumentFactory = class(TInterfacedObject, IDocumentFactory)
   private
-    fNotebook: TEdNotebook;
+    fNotebook: TNicePages;
     fUntitledManager: IUntitledManager;
 //    fHiSyntax: IHiSyntax;
   public
-    constructor Create(ANotebook: TEdNotebook);
+    constructor Create(ANotebook: TNicePages);
     function GetDocumentCount: integer;
     function GetDocument(Index: integer): IDocument;
     function CreateNew(AFileName: string): IDocument;
@@ -32,7 +32,7 @@ uses
 
 { TDocumentFactory }
 
-constructor TDocumentFactory.Create(ANotebook: TEdNotebook);
+constructor TDocumentFactory.Create(ANotebook: TNicePages);
 begin
   fNotebook := ANotebook;
   fUntitledManager := TUntitledManager.Create();
@@ -51,7 +51,7 @@ end;
 
 function TDocumentFactory.CreateNew(AFileName: string): IDocument;
 var
-  sheet: TEdSheet;
+  sheet: TNiceSheet;
   syn: TAtSynEdit;
 begin
   sheet := FNotebook.AddTabSheet();
